@@ -1,49 +1,88 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
+import AppUtil 1.0
 
-Rectangle{
-    property string imageDayPath: "1"
-    property string imageNightPath: "2"
-    property string date
-    property string minTemp
-    property string maxTemp
-    property alias wW: width / 180
+ShadowedRectangle {
+    property string imageDayPath: ""
+    property string imageNightPath: ""
+    property string minTemp: "--"
+    property string maxTemp: "--"
+    property int imageSize: 120
 
-    height: width
+    shadowEnabled: false
+    shadowColor: "#CCFFFF"
+
+    width: imageSize*2 + imageSize/2 + weatherIcon.spacing*2
+    height: imageSize + celcius.height
     color: "transparent"
 
-    RowLayout{
+    Rectangle{
+        id: celcius
         width: parent.width
-        height: 60
-        spacing: 10
+        height: 50
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        radius: height / 2
+        color: Qt.rgba(0,0,0,0.5)
+
+        Text {
+            text: maxTemp + qsTr("°C")
+            color: "orange"
+            font.pixelSize: 25
+            font.family: AppUtil.fontNunito.name
+            anchors{
+                verticalCenter: parent.verticalCenter
+                right: parent.right
+                rightMargin: 20
+            }
+        }
+
+        Image {
+            id: name
+            source: "qrc:/image/season.png"
+            sourceSize: Qt.size(45,45)
+            anchors.centerIn: parent
+        }
+
+        Text {
+            text: minTemp + qsTr("°C")
+            color: "#00FFFF"
+            font.pixelSize: 25
+            font.family: AppUtil.fontNunito.name
+            anchors{
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+                leftMargin: 20
+            }
+        }
+    }
+
+    Row{
+        id: weatherIcon
+        width: childrenRect.width
+        height: imageSize
         anchors{
-            bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
+            bottom: parent.bottom
+        }
+        spacing: 5
+
+        Image {
+            source: "qrc:/image/" + imageDayPath + "-s.png"
+            width: imageSize
+            height: imageSize
         }
 
         Image {
-            id: dayWeather
-            source: "qrc:/image/"+ imageDayPath + "-s.png"
-            width: 60
-            height: width
-            sourceSize: Qt.size(width, width)
-        }
-
-        Image {
-            id: dayNight
             source: "qrc:/image/day-and-night.png"
-            width: 40
-            height: width
-            sourceSize: Qt.size(width, width)
+            sourceSize: Qt.size(imageSize / 1.8, imageSize / 1.8)
+            anchors.verticalCenter: parent.verticalCenter
         }
 
         Image {
-            id: nightWeather
-            source: "qrc:/image/"+ imageNightPath + "-s.png"
-            width: 60
-            height: width
-            sourceSize: Qt.size(width, width)
+            source: "qrc:/image/" + imageNightPath + "-s.png"
+            width: imageSize
+            height: imageSize
         }
     }
 }

@@ -18,26 +18,61 @@ class ApiRequest : public QObject
     Q_OBJECT
 public:
     explicit ApiRequest(QObject *parent = nullptr);
-    Q_PROPERTY(QJsonObject JsonData READ JsonData WRITE setJsonData NOTIFY JsonDataChanged FINAL)
+    Q_PROPERTY(QJsonObject dayOne READ dayOne WRITE setDayOne NOTIFY dayOneChanged FINAL)
+    Q_PROPERTY(QJsonObject dayTwo READ dayTwo WRITE setDayTwo NOTIFY dayTwoChanged FINAL)
+    Q_PROPERTY(QJsonObject dayThree READ dayThree WRITE setDayThree NOTIFY dayThreeChanged FINAL)
+    Q_PROPERTY(QJsonObject dayFour READ dayFour WRITE setDayFour NOTIFY dayFourChanged FINAL)
+    Q_PROPERTY(QJsonObject dayFive READ dayFive WRITE setDayFive NOTIFY dayFiveChanged FINAL)
 
-    QJsonObject JsonData() const;
-    void setJsonData(const QJsonObject &newJsonData);
+    QJsonObject dayOne() const;
+    void setDayOne(const QJsonObject &newDayOne);
+
+    QJsonObject dayTwo() const;
+    void setDayTwo(const QJsonObject &newDayTwo);
+
+    QJsonObject dayThree() const;
+    void setDayThree(const QJsonObject &newDayThree);
+
+    QJsonObject dayFour() const;
+    void setDayFour(const QJsonObject &newDayFour);
+
+    QJsonObject dayFive() const;
+    void setDayFive(const QJsonObject &newDayFive);
+
+public slots:
     void requestAPI();
 
 private:
     QUrl m_requestURL;
     const QString m_apiKey;
     QUrlQuery m_query;
-    QJsonObject m_JsonData;
     QNetworkRequest m_request;
     QNetworkAccessManager m_manager;
     QNetworkReply* m_reply;
 
 signals:
-    void JsonDataChanged();
+
+    void dayOneChanged();
+
+    void dayTwoChanged();
+
+    void dayThreeChanged();
+
+    void dayFourChanged();
+
+    void dayFiveChanged();
 
 private:
 
+    QJsonObject m_dayOne;
+
+    QJsonObject m_dayTwo;
+
+    QJsonObject m_dayThree;
+
+    QJsonObject m_dayFour;
+
+    QJsonObject m_dayFive;
 
 private slots:
     void apiFinished();

@@ -9,19 +9,6 @@ ApiRequest::ApiRequest(QObject *parent)
     m_request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/json"));
 }
 
-QJsonObject ApiRequest::JsonData() const
-{
-    return m_JsonData;
-}
-
-void ApiRequest::setJsonData(const QJsonObject &newJsonData)
-{
-    if (m_JsonData == newJsonData)
-        return;
-    m_JsonData = newJsonData;
-    emit JsonDataChanged();
-}
-
 void ApiRequest::requestAPI(){
     qInfo()<<"STARTING REQUEST API";
     m_reply = m_manager.get(m_request);
@@ -50,6 +37,74 @@ void ApiRequest::apiRead(){
     QJsonDocument responseDoc = QJsonDocument::fromJson(dataFromAPI);
     QJsonObject responseObj = responseDoc.object();
     QJsonArray responseArray = responseObj["DailyForecasts"].toArray();
-    QJsonObject dayOne = responseArray.at(0).toObject();
-    qInfo()<<"Date: "<<dayOne["Date"].toString();
+    setDayOne(responseArray.at(0).toObject());
+    setDayTwo(responseArray.at(1).toObject());
+    setDayThree(responseArray.at(2).toObject());
+    setDayFour(responseArray.at(3).toObject());
+    setDayFive(responseArray.at(4).toObject());
+}
+
+QJsonObject ApiRequest::dayOne() const
+{
+    return m_dayOne;
+}
+
+void ApiRequest::setDayOne(const QJsonObject &newDayOne)
+{
+    if (m_dayOne == newDayOne)
+        return;
+    m_dayOne = newDayOne;
+    emit dayOneChanged();
+}
+
+QJsonObject ApiRequest::dayTwo() const
+{
+    return m_dayTwo;
+}
+
+void ApiRequest::setDayTwo(const QJsonObject &newDayTwo)
+{
+    if (m_dayTwo == newDayTwo)
+        return;
+    m_dayTwo = newDayTwo;
+    emit dayTwoChanged();
+}
+
+QJsonObject ApiRequest::dayThree() const
+{
+    return m_dayThree;
+}
+
+void ApiRequest::setDayThree(const QJsonObject &newDayThree)
+{
+    if (m_dayThree == newDayThree)
+        return;
+    m_dayThree = newDayThree;
+    emit dayThreeChanged();
+}
+
+QJsonObject ApiRequest::dayFour() const
+{
+    return m_dayFour;
+}
+
+void ApiRequest::setDayFour(const QJsonObject &newDayFour)
+{
+    if (m_dayFour == newDayFour)
+        return;
+    m_dayFour = newDayFour;
+    emit dayFourChanged();
+}
+
+QJsonObject ApiRequest::dayFive() const
+{
+    return m_dayFive;
+}
+
+void ApiRequest::setDayFive(const QJsonObject &newDayFive)
+{
+    if (m_dayFive == newDayFive)
+        return;
+    m_dayFive = newDayFive;
+    emit dayFiveChanged();
 }

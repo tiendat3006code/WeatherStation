@@ -47,5 +47,10 @@
         <file>singletons/AppUtil.qml</file>
         <file>components/WeatherItem.qml</file>
         <file>image/day-and-night.png</file>
+        <file>components/ItemWeather.qml</file>
+        <file>components/ShadowedRectangle.qml</file>
+        <file>image/night-and-day.png</file>
+        <file>image/season.png</file>
+        <file>image/anime-style-scene.jpg</file>
     </qresource>
 </RCC>

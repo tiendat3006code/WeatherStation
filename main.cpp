@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "apirequest.h"
+#include <QTimer>
 
 int main(int argc, char *argv[])
 {
@@ -25,7 +26,11 @@ int main(int argc, char *argv[])
         },
         Qt::QueuedConnection);
     engine.load(url);
-    // request.requestAPI();
+
+    QTimer timerRequest;
+    timerRequest.setSingleShot(true);
+    QObject::connect(&timerRequest, &QTimer::timeout, &request, &ApiRequest::requestAPI);
+    timerRequest.start(2000);
 
     return app.exec();
 }
