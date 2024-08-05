@@ -10,6 +10,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QUrl>
+#include <QUrlQuery>
 #include <QString>
 
 class ApiRequest : public QObject
@@ -24,8 +25,9 @@ public:
     void requestAPI();
 
 private:
-    const QUrl m_requestURL;
+    QUrl m_requestURL;
     const QString m_apiKey;
+    QUrlQuery m_query;
     QJsonObject m_JsonData;
     QNetworkRequest m_request;
     QNetworkAccessManager m_manager;

@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
         },
         Qt::QueuedConnection);
     engine.load(url);
-    request.requestAPI();
+    // request.requestAPI();
 
     return app.exec();
 }

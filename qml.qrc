@@ -1,14 +1,14 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>image/01-s.png</file>
-        <file>image/02-s.png</file>
-        <file>image/03-s.png</file>
-        <file>image/04-s.png</file>
-        <file>image/05-s.png</file>
-        <file>image/06-s.png</file>
-        <file>image/07-s.png</file>
-        <file>image/08-s.png</file>
+        <file>image/1-s.png</file>
+        <file>image/2-s.png</file>
+        <file>image/3-s.png</file>
+        <file>image/4-s.png</file>
+        <file>image/5-s.png</file>
+        <file>image/6-s.png</file>
+        <file>image/7-s.png</file>
+        <file>image/8-s.png</file>
         <file>image/11-s.png</file>
         <file>image/12-s.png</file>
         <file>image/13-s.png</file>
@@ -45,5 +45,7 @@
         <file>font/Nunito/Nunito-Medium.ttf</file>
         <file>font/Nunito/Nunito-SemiBold.ttf</file>
         <file>singletons/AppUtil.qml</file>
+        <file>components/WeatherItem.qml</file>
+        <file>image/day-and-night.png</file>
     </qresource>
 </RCC>

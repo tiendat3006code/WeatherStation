@@ -3,9 +3,10 @@
 ApiRequest::ApiRequest(QObject *parent)
     : QObject{parent}, m_requestURL("http://dataservice.accuweather.com/forecasts/v1/daily/5day/353412?apikey=1aM0jMtV6150kFG2ogodO1vNnfbN7Gr4"), m_apiKey("1aM0jMtV6150kFG2ogodO1vNnfbN7Gr4")
 {
+    m_query.addQueryItem("apikey", m_apiKey);
+    m_requestURL.setQuery(m_query);
     m_request.setUrl(m_requestURL);
     m_request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/json"));
-    //m_request.setRawHeader("?apikey=", m_apiKey.toUtf8());
 }
 
 QJsonObject ApiRequest::JsonData() const
@@ -48,5 +49,7 @@ void ApiRequest::apiRead(){
     qInfo()<<"Data reply from server: "<<dataFromAPI;
     QJsonDocument responseDoc = QJsonDocument::fromJson(dataFromAPI);
     QJsonObject responseObj = responseDoc.object();
-    QJsonArray responseArray = responseDoc.array();
+    QJsonArray responseArray = responseObj["DailyForecasts"].toArray();
+    QJsonObject dayOne = responseArray.at(0).toObject();
+    qInfo()<<"Date: "<<dayOne["Date"].toString();
 }
